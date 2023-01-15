@@ -10,7 +10,7 @@ const {nodemail,test} = require('./mail.js');
 
 const cors = require('cors');
 app.use(cors({
-    origin: 'https://serversiti.000webhostapp.com/'
+    origin: 'https://serversiti.000webhostapp.com'
 }));
 
 // read static files
