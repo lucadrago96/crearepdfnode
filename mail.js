@@ -14,6 +14,7 @@ const nodemail = {
 
     sendMail: async function (from, to, subject, text, html, attachments)  {
         // send mail with defined transport object
+        console.log("invio mail")
         let info = await this.transporter.sendMail({
             from: from, // sender address
             to: to, // list of receivers

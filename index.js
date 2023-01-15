@@ -31,7 +31,7 @@ app.post('/test', function(req, res){
     res.send("ok");
 })
 
-app.post('/savedata', function(req, res){
+app.post('/savedata', async function(req, res) {
 
     let {nome = "", email = "", tel = "", termini = false} = req.body;
     let validData = validate( 
@@ -50,7 +50,12 @@ app.post('/savedata', function(req, res){
           }
     ]
     if(validData){
-        nodemail.sendMail("Marketing della Paura 😱 <emilio@emiliobonura.com>",email,"Marketing della paura!", `Ciao ${nome}, allegato a questa mail troverai il pdf completo`, "",attach);
+        try{
+           await  nodemail.sendMail("Marketing della Paura 😱 <emilio@emiliobonura.com>",email,"Marketing della paura!", `Ciao ${nome}, allegato a questa mail troverai il pdf completo`, "",attach);
+        }catch(err){
+            console.log(err);
+            throw err;
+        }
         //nodemail.sendMail("emilio@emiliobonura.com","emilio@emiliobonura.com","Iscrizione a marketint della paura", `L'utente ${nome} si è uscritti a marketing della paura con l'email ${email}, il suo numero è ${tel}`);
     }
 
