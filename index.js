@@ -34,6 +34,13 @@ app.post('/test', function(req, res){
 app.post('/savedata', async function(req, res) {
 
     let {nome = "", email = "", tel = "", termini = false} = req.body;
+    
+    let a = nome != "" ? true : false;
+    let b = validateEmail(email) ? true : false;
+    let c = (tel.length >= 9 && tel.length <= 10) ? true : false;;
+    let d = termini;
+    let arr = [a, b, c, d];
+    
     let validData = validate( 
         (when) => {
             when( nome != ""), 
@@ -51,7 +58,7 @@ app.post('/savedata', async function(req, res) {
     ]
     if(validData){
         try{
-           await  nodemail.sendMail("Marketing della Paura 😱 <emilio@emiliobonura.com>",email,"Marketing della paura!", `Ciao ${nome}, allegato a questa mail troverai il pdf completo`, "",attach);
+           //await  nodemail.sendMail("Marketing della Paura 😱 <emilio@emiliobonura.com>",email,"Marketing della paura!", `Ciao ${nome}, allegato a questa mail troverai il pdf completo`, "",attach);
         }catch(err){
             console.log(err);
             throw err;
@@ -59,7 +66,7 @@ app.post('/savedata', async function(req, res) {
         //nodemail.sendMail("emilio@emiliobonura.com","emilio@emiliobonura.com","Iscrizione a marketint della paura", `L'utente ${nome} si è uscritti a marketing della paura con l'email ${email}, il suo numero è ${tel}`);
     }
 
-    res.send(validData);
+    res.send(arr.toString());
 });
 
 const validateEmail = (email) => {
