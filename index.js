@@ -26,7 +26,7 @@ app.post('/pdf', function(req, res){
         res.redirect(v);
     })
 });
-app.post('/test', function(req, res){
+app.get('/test', function(req, res){
     console.log("ciao");
     res.send("ok");
 })
