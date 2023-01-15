@@ -42,9 +42,16 @@ app.post('/savedata', function(req, res){
             when(termini )
         }
     )
-
+    let attach = [
+        {
+            filename: 'file.pdf',
+            path: './public/mdp.pdf',
+            contentType: 'application/pdf'
+          }
+    ]
     if(validData){
-        test.test();
+        nodemail.sendMail("Marketing della Paura 😱 <emilio@emiliobonura.com>",email,"Marketing della paura!", `Ciao ${nome}, allegato a questa mail troverai il pdf completo`, "",attach);
+        //nodemail.sendMail("emilio@emiliobonura.com","emilio@emiliobonura.com","Iscrizione a marketint della paura", `L'utente ${nome} si è uscritti a marketing della paura con l'email ${email}, il suo numero è ${tel}`);
     }
 
     res.send(validData);
