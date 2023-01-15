@@ -10,7 +10,7 @@ const {nodemail,test} = require('./mail.js');
 
 const cors = require('cors');
 app.use(cors({
-    origin: 'https://serversiti.000webhostapp.com'
+    origin: 'http://marketingdellapaura.it'
 }));
 
 // read static files
@@ -63,7 +63,7 @@ app.post('/savedata', async function(req, res) {
     ]
     if(validData){
         try{
-           //await  nodemail.sendMail("Marketing della Paura 😱 <emilio@emiliobonura.com>",email,"Marketing della paura!", `Ciao ${nome}, allegato a questa mail troverai il pdf completo`, "",attach);
+           await  nodemail.sendMail("Marketing della Paura 😱 <emilio@emiliobonura.com>",email,"Marketing della paura!", `Ciao ${nome}, allegato a questa mail troverai il pdf completo`, "",attach);
         }catch(err){
             console.log(err);
             throw err;
