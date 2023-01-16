@@ -16,6 +16,7 @@ const nodemail = {
     sendMail: async function (from, to, subject, text, html, attachments) {
 
        
+        console.log(process.env.HOST);
 
         // send mail with defined transport object
         console.log("invio mail")
