@@ -17,8 +17,9 @@ const nodemail = {
 
        
         // send mail with defined transport object
+        console.log(process.env.NAME)
         console.log("invio mail")
-        let info = await this.transporter.sendMail({
+        /*let info = await this.transporter.sendMail({
             from: from, // sender address
             to: to, // list of receivers
             subject: subject, // Subject line
@@ -27,7 +28,7 @@ const nodemail = {
             attachments: attachments // plain text body
         });
     
-        console.log("Message sent: %s", info.messageId);
+        console.log("Message sent: %s", info.messageId);*/
 
     }
 }
