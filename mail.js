@@ -1,51 +1,24 @@
 const nodemailer = require("nodemailer");
 
+
 const nodemail = {
     transporter: nodemailer.createTransport({
-        host: "smtp-relay.sendinblue.com",
+        host: process.env.HOST, //"smtp-relay.sendinblue.com",
         port: 587,
         secure: false, // true for 465, false for other ports
         auth: {
-            user: "lucadrago96@hotmail.com", // generated ethereal user
-            pass: "", // generated ethereal password
+            user: process.env.NAME, // generated ethereal user
+            pass: process.env.PWD, // generated ethereal password
         },
     }),
 
 
     sendMail: async function (from, to, subject, text, html, attachments) {
 
-        const mailjet = require('node-mailjet')
-        mailjet.connect(process.env.MJ_APIKEY_PUBLIC, process.env.MJ_APIKEY_PRIVATE)
-        console.log(process.env.MJ_APIKEY_PUBLIC, process.env.MJ_APIKEY_PRIVATE)
-        const request = mailjet
-            .post("send", { 'version': 'v3.1' })
-            .request({
-                "Messages": [
-                    {
-                        "From": {
-                            "Email": from,
-                        },
-                        "To": [
-                            {
-                                "Email": to,
-                            }
-                        ],
-                        "Subject": subject,
-                        "TextPart": text,
-                        "Attachments": attachments
-                    }
-                ]
-            })
-        request
-            .then((result) => {
-                console.log(result.body)
-            })
-            .catch((err) => {
-                console.log(err.statusCode)
-            })
+       
 
         // send mail with defined transport object
-        /*console.log("invio mail")
+        console.log("invio mail")
         let info = await this.transporter.sendMail({
             from: from, // sender address
             to: to, // list of receivers
