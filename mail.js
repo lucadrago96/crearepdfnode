@@ -8,7 +8,7 @@ const nodemail = {
         secure: false, // true for 465, false for other ports
         auth: {
             user: process.env.NAME, // generated ethereal user
-            pass: process.env.PWD, // generated ethereal password
+            pass: process.env.PASS, // generated ethereal password
         },
     }),
 
@@ -19,7 +19,7 @@ const nodemail = {
         // send mail with defined transport object
         console.log(process.env.HOST)
         console.log(process.env.NAME)
-        console.log(process.env.PWD)
+        console.log(process.env.PASS)
         console.log("invio mail")
         let info = await this.transporter.sendMail({
             from: from, // sender address
