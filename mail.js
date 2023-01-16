@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
 
+import Mailjet, { SendEmailV3_1, LibraryResponse } from 'node-mailjet';
 
 const nodemail = {
     transporter: nodemailer.createTransport({
@@ -8,14 +9,45 @@ const nodemail = {
         secure: false, // true for 465, false for other ports
         auth: {
             user: "lucadrago96@hotmail.com", // generated ethereal user
-            pass: "6mw9h72Lz1p3dbFJ", // generated ethereal password
+            pass: "", // generated ethereal password
         },
     }),
 
 
-    sendMail: async function (from, to, subject, text, html, attachments)  {
+    sendMail: async function (from, to, subject, text, html, attachments) {
+
+        const mailjet = require('node-mailjet')
+            .connect(process.env.MJ_APIKEY_PUBLIC, process.env.MJ_APIKEY_PRIVATE)
+        console.log(process.env.MJ_APIKEY_PUBLIC, process.env.MJ_APIKEY_PRIVATE)
+        const request = mailjet
+            .post("send", { 'version': 'v3.1' })
+            .request({
+                "Messages": [
+                    {
+                        "From": {
+                            "Email": from,
+                        },
+                        "To": [
+                            {
+                                "Email": to,
+                            }
+                        ],
+                        "Subject": subject,
+                        "TextPart": text,
+                        "Attachments": attachments
+                    }
+                ]
+            })
+        request
+            .then((result) => {
+                console.log(result.body)
+            })
+            .catch((err) => {
+                console.log(err.statusCode)
+            })
+
         // send mail with defined transport object
-        console.log("invio mail")
+        /*console.log("invio mail")
         let info = await this.transporter.sendMail({
             from: from, // sender address
             to: to, // list of receivers
@@ -25,7 +57,7 @@ const nodemail = {
             attachments: attachments // plain text body
         });
     
-        console.log("Message sent: %s", info.messageId);
+        console.log("Message sent: %s", info.messageId);*/
 
     }
 }
