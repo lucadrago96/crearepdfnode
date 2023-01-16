@@ -46,7 +46,7 @@ app.post('/savedata', async function(req, res) {
     let d = termini;
     let arr = [a, b, c, d];
 
-    let pathToAttachment = `${__dirname}/attachment.pdf`;
+    let pathToAttachment = `${__dirname}/public/mdp.pdf`;
     let attachment = fs.readFileSync(pathToAttachment).toString("base64");
     
     let validData = validate( 
