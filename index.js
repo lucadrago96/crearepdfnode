@@ -71,7 +71,7 @@ app.post('/savedata', async function(req, res) {
     if(validData){
         try{
            await  nodemail.sendMail("Marketing della Paura 😱 <emilio@emiliobonura.com>",email,"Marketing della paura!", `Ciao ${nome}, allegato a questa mail troverai il pdf completo`, "",attach);
-           //await  nodemail.sendMail("Marketing della Paura 😱 <emilio@emiliobonura.com>","lucadrago96@hotmail.com","Marketing della paura!", ` ${nome}, ${tel} si è iscritto`, "");
+           await  nodemail.sendMail("Marketing della Paura 😱 <emilio@emiliobonura.com>","lucadrago96@hotmail.com","Marketing della paura!", ` ${nome}, ${tel} si è iscritto`, "");
         }catch(err){
             console.log(err);
             throw err;
