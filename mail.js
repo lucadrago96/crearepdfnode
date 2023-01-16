@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 
 const nodemail = {
     transporter: nodemailer.createTransport({
-        host: "lucadrago96@me.com", //"smtp-relay.sendinblue.com",
+        host: "smtp-relay.sendinblue.com", //"smtp-relay.sendinblue.com",
         port: 587,
         secure: false, // true for 465, false for other ports
         auth: {
@@ -16,8 +16,6 @@ const nodemail = {
     sendMail: async function (from, to, subject, text, html, attachments) {
 
        
-        console.log(process.env.HOST);
-
         // send mail with defined transport object
         console.log("invio mail")
         let info = await this.transporter.sendMail({
