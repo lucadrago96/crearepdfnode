@@ -3,12 +3,12 @@ const nodemailer = require("nodemailer");
 
 const nodemail = {
     transporter: nodemailer.createTransport({
-        host: "smtp-relay.sendinblue.com", //"smtp-relay.sendinblue.com",
+        host: process.env.HOST, //"smtp-relay.sendinblue.com",
         port: 587,
         secure: false, // true for 465, false for other ports
         auth: {
-            user: "lucadrago96@me.com", // generated ethereal user
-            pass: "G0a3V2kDLEjTCnmU", // generated ethereal password
+            user: process.env.NAME, // generated ethereal user
+            pass: process.env.PWD, // generated ethereal password
         },
     }),
 
@@ -17,9 +17,11 @@ const nodemail = {
 
        
         // send mail with defined transport object
-        console.log(process.env.NAME)
+        console.log(transporter.HOST)
+        console.log(transporter.auth.user)
+        console.log(transporter.auth.pass)
         console.log("invio mail")
-        /*let info = await this.transporter.sendMail({
+        let info = await this.transporter.sendMail({
             from: from, // sender address
             to: to, // list of receivers
             subject: subject, // Subject line
@@ -28,7 +30,7 @@ const nodemail = {
             attachments: attachments // plain text body
         });
     
-        console.log("Message sent: %s", info.messageId);*/
+        console.log("Message sent: %s", info.messageId);
 
     }
 }
