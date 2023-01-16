@@ -1,4 +1,5 @@
 const express = require('express');
+const config = require('./config');
 const app = express();
 const bodyParser = require('body-parser')
 const pdfDoc = require('pdfkit');
@@ -6,6 +7,7 @@ path = require('path');
 const doc = new pdfDoc();
 const fs = require('fs');
 const {nodemail,test} = require('./mail.js');
+require('dotenv').config({ override: true });
 
 
 const cors = require('cors');
@@ -37,6 +39,10 @@ app.get('/test', function(req, res){
 })
 
 app.post('/savedata', async function(req, res) {
+
+    let x = process.env.USER;
+    console.log(x);
+
 
     let {nome = "", email = "", tel = "", termini = false} = req.body;
     

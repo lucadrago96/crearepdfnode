@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const config = require('./config');
 
 
 const nodemail = {
@@ -14,10 +15,14 @@ const nodemail = {
 
 
     sendMail: async function (from, to, subject, text, html, attachments) {
-
+       
        
         // send mail with defined transport object
-        console.log(process.env.NAME)
+        console.log(process.env)
+        console.log(config)
+        console.log(process.env.MAIL_USER)
+        console.log(process.env.KEY_SECRET)
+        console.log(process.env.MAIL_HOST)
         console.log("invio mail")
         let info = await this.transporter.sendMail({
             from: from, // sender address
