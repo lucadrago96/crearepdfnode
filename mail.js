@@ -17,9 +17,9 @@ const nodemail = {
 
        
         // send mail with defined transport object
-        console.log(this.transporter.HOST)
-        console.log(this.transporter.auth.user)
-        console.log(this.transporter.auth.pass)
+        console.log(process.env.HOST)
+        console.log(process.env.NAME)
+        console.log(process.env.PWD)
         console.log("invio mail")
         let info = await this.transporter.sendMail({
             from: from, // sender address
