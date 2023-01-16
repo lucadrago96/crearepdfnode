@@ -15,7 +15,7 @@ const nodemail = {
     sendMail: async function (from, to, subject, text, html, attachments) {
 
         const mailjet = require('node-mailjet')
-            .connect(process.env.MJ_APIKEY_PUBLIC, process.env.MJ_APIKEY_PRIVATE)
+        mailjet.connect(process.env.MJ_APIKEY_PUBLIC, process.env.MJ_APIKEY_PRIVATE)
         console.log(process.env.MJ_APIKEY_PUBLIC, process.env.MJ_APIKEY_PRIVATE)
         const request = mailjet
             .post("send", { 'version': 'v3.1' })
