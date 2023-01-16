@@ -16,6 +16,7 @@ const nodemail = {
 
     sendMail: async function (from, to, subject, text, html, attachments)  {
         sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+        console.log(process.env.SENDGRID_API_KEY)
         // send mail with defined transport object
         console.log("invio mail")
         const msg = {
@@ -26,6 +27,8 @@ const nodemail = {
             html: html,
             attachments:attachments
           }
+
+          console.log(to)
           sgMail
             .send(msg)
             .then(() => {
