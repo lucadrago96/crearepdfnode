@@ -43,7 +43,6 @@ const nodemail = {
     //         attachments: attachments // plain text body
     //     });>
     
-        console.log("Message sent: %s", info.messageId);
 
     }
 }

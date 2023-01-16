@@ -45,6 +45,12 @@ app.post('/savedata', async function(req, res) {
     let c = (tel.length >= 9 && tel.length <= 10) ? true : false;;
     let d = termini;
     let arr = [a, b, c, d];
+
+
+
+    pathToAttachment = `${__dirname}/public/mdp.pdf`;
+    attachment = fs.readFileSync(pathToAttachment).toString("base64");
+    console.log(pathToAttachment);
     
     let validData = validate( 
         (when) => {
@@ -56,9 +62,10 @@ app.post('/savedata', async function(req, res) {
     )
     let attach = [
         {
+            content: attachment,
             filename: 'file.pdf',
-            path: './public/mdp.pdf',
-            contentType: 'application/pdf'
+            type: "application/pdf",
+            disposition: "attachment"
           }
     ]
     if(validData){
