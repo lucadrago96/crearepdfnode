@@ -1,7 +1,5 @@
 const nodemailer = require("nodemailer");
 
-import Mailjet, { SendEmailV3_1, LibraryResponse } from 'node-mailjet';
-
 const nodemail = {
     transporter: nodemailer.createTransport({
         host: "smtp-relay.sendinblue.com",
