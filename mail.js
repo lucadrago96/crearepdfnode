@@ -3,12 +3,12 @@ const nodemailer = require("nodemailer");
 
 const nodemail = {
     transporter: nodemailer.createTransport({
-        host: process.env.HOST, //"smtp-relay.sendinblue.com",
+        host: "lucadrago96@me.com", //"smtp-relay.sendinblue.com",
         port: 587,
         secure: false, // true for 465, false for other ports
         auth: {
-            user: process.env.NAME, // generated ethereal user
-            pass: process.env.PWD, // generated ethereal password
+            user: "lucadrago96@me.com", // generated ethereal user
+            pass: "G0a3V2kDLEjTCnmU", // generated ethereal password
         },
     }),
 
