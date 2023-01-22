@@ -1,4 +1,5 @@
 const express = require('express');
+const config = require('./config');
 const app = express();
 const bodyParser = require('body-parser')
 const pdfDoc = require('pdfkit');
@@ -6,6 +7,7 @@ path = require('path');
 const doc = new pdfDoc();
 const fs = require('fs');
 const {nodemail,test} = require('./mail.js');
+require('dotenv').config({ override: true });
 
 
 const cors = require('cors');
@@ -38,6 +40,10 @@ app.get('/test', function(req, res){
 
 app.post('/savedata', async function(req, res) {
 
+    let x = process.env.USER;
+    console.log(x);
+
+
     let {nome = "", email = "", tel = "", termini = false} = req.body;
     
     let a = nome != "" ? true : false;
@@ -65,6 +71,7 @@ app.post('/savedata', async function(req, res) {
     if(validData){
         try{
            await  nodemail.sendMail("Marketing della Paura 😱 <emilio@emiliobonura.com>",email,"Marketing della paura!", `Ciao ${nome}, allegato a questa mail troverai il pdf completo`, "",attach);
+           await  nodemail.sendMail("Marketing della Paura 😱 <emilio@emiliobonura.com>","lucadrago96@hotmail.com","Marketing della paura!", ` ${nome}, ${tel} si è iscritto`, "");
         }catch(err){
             console.log(err);
             throw err;
