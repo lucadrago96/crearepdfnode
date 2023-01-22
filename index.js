@@ -10,7 +10,7 @@ const {nodemail,test} = require('./mail.js');
 
 const cors = require('cors');
 app.use(cors({
-    origin: 'http://marketingdellapaura.it'
+    origin: ['http://marketingdellapaura.it','http://justboat.info']
 }));
 
 // read static files
@@ -65,6 +65,38 @@ app.post('/savedata', async function(req, res) {
     if(validData){
         try{
            await  nodemail.sendMail("Marketing della Paura 😱 <emilio@emiliobonura.com>",email,"Marketing della paura!", `Ciao ${nome}, allegato a questa mail troverai il pdf completo`, "",attach);
+        }catch(err){
+            console.log(err);
+            throw err;
+        }
+        //nodemail.sendMail("emilio@emiliobonura.com","emilio@emiliobonura.com","Iscrizione a marketint della paura", `L'utente ${nome} si è uscritti a marketing della paura con l'email ${email}, il suo numero è ${tel}`);
+    }
+
+    res.send(arr.toString());
+});
+
+app.post('/boat', async function(req, res) {
+
+    let {nome = "", email = "", tel = "", termini = false} = req.body;
+    
+    let a = nome != "" ? true : false;
+    let b = validateEmail(email) ? true : false;
+    let c = (tel.length >= 9 && tel.length <= 10) ? true : false;;
+    let d = termini;
+    let arr = [a, b, c, d];
+    
+    let validData = validate( 
+        (when) => {
+            when( nome != ""), 
+            when( validateEmail(email) ), 
+            when( tel.length >= 9 && tel.length <= 10 ), 
+            when(termini )
+        }
+    )
+
+    if(validData){
+        try{
+           await  nodemail.sendMail(email,"emilio@emiliobonura.com","Marketing della paura!", ` ${nome}, si è iscritto a infoboat contattalo a ${mail}  oppure chiamalo al ${numero}`, "");
         }catch(err){
             console.log(err);
             throw err;
