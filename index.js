@@ -8,7 +8,17 @@ const doc = new pdfDoc();
 const fs = require('fs');
 const {nodemail,test} = require('./mail.js');
 require('dotenv').config({ override: true });
+const mongoose = require('mongoose');
+const User = require('./user');
 
+mongoose.connect(process.env.MONGO, 
+    { useNewUrlParser: true,useUnifiedTopology: true })
+    .then(() => console.log( 'Database Connected' ))
+    .catch(err => {
+        console.log( err );
+    });
+    
+     
 
 const cors = require('cors');
 app.use(cors({
@@ -71,7 +81,20 @@ app.post('/savedata', async function(req, res) {
     if(validData){
         try{
            await  nodemail.sendMail("Marketing della Paura 😱 <emilio@emiliobonura.com>",email,"Marketing della paura!", `Ciao ${nome}, allegato a questa mail troverai il pdf completo`, "",attach);
-           await  nodemail.sendMail("Marketing della Paura 😱 <emilio@emiliobonura.com>","lucadrago96@hotmail.com","Marketing della paura!", ` ${nome}, ${tel} si è iscritto`, "");
+           const user = new User({
+            name: nome,
+            surname: nome,
+            email: email,
+            numero: tel,
+            sito: "mdp",
+            
+    
+        });
+
+        await user.save();
+    
+          
+           // await  nodemail.sendMail("Marketing della Paura 😱 <emilio@emiliobonura.com>","lucadrago96@hotmail.com","Marketing della paura!", ` ${nome}, ${tel} si è iscritto`, "");
         }catch(err){
             console.log(err);
             throw err;
@@ -103,7 +126,18 @@ app.post('/boat', async function(req, res) {
 
     if(validData){
         try{
-           await  nodemail.sendMail(email,"emilio@emiliobonura.com","Marketing della paura!", ` ${nome}, si è iscritto a infoboat contattalo a ${mail}  oppure chiamalo al ${numero}`, "");
+                const user = new User({
+                 name: nome,
+                 surname: nome,
+                 email: email,
+                 numero: tel,
+                 sito: "boat",
+                 
+         
+             });
+     
+             await user.save();
+           //await  nodemail.sendMail(email,"emilio@emiliobonura.com","Marketing della paura!", ` ${nome}, si è iscritto a infoboat contattalo a ${mail}  oppure chiamalo al ${numero}`, "");
         }catch(err){
             console.log(err);
             throw err;
