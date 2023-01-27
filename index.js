@@ -150,7 +150,7 @@ app.post('/boat', async function(req, res) {
              });
      
              await user.save();
-           await  nodemail.sendMail(email,"lucadrago96@hotmail.com","InfoBoat", ` ${nome}, si è iscritto a infoboat contattalo a ${email}  oppure chiamalo al ${tel}`, "");
+           await  nodemail.sendMail(email,"emilio@emiliobonura.com","InfoBoat", ` ${nome}, si è iscritto a infoboat contattalo a ${email}  oppure chiamalo al ${tel}`, "");
         }catch(err){
             console.log(err);
             throw err;
