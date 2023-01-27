@@ -10,6 +10,7 @@ const {nodemail,test} = require('./mail.js');
 require('dotenv').config({ override: true });
 const mongoose = require('mongoose');
 const User = require('./user');
+const Data = require('./data');
 
 mongoose.connect(process.env.MONGO, 
     { useNewUrlParser: true,useUnifiedTopology: true })
@@ -61,7 +62,13 @@ app.post('/savedata', async function(req, res) {
     let c = (tel.length >= 9 && tel.length <= 10) ? true : false;;
     let d = termini;
     let arr = [a, b, c, d];
-    
+
+
+    const log = new Data({
+        data: req.body.toString(),
+        sito: "mdp"
+    })
+    log.save();
     let validData = validate( 
         (when) => {
             when( nome != ""), 
@@ -124,6 +131,12 @@ app.post('/boat', async function(req, res) {
         }
     )
 
+    const log = new Data({
+        data: req.body.toString(),
+        sito: "boat"
+    }) 
+    
+    log.save()
     if(validData){
         try{
                 const user = new User({
@@ -137,7 +150,7 @@ app.post('/boat', async function(req, res) {
              });
      
              await user.save();
-           //await  nodemail.sendMail(email,"emilio@emiliobonura.com","Marketing della paura!", ` ${nome}, si è iscritto a infoboat contattalo a ${mail}  oppure chiamalo al ${numero}`, "");
+           await  nodemail.sendMail(email,"lucadrago96@hotmail.com","InfoBoat", ` ${nome}, si è iscritto a infoboat contattalo a ${mail}  oppure chiamalo al ${numero}`, "");
         }catch(err){
             console.log(err);
             throw err;
