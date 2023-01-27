@@ -138,7 +138,7 @@ app.post('/boat', async function(req, res) {
     )
 
     const log = new Data({
-        data: req.body.toString(),
+        data: JSON.stringify(req.body),
         sito: "boat"
     }) 
     
