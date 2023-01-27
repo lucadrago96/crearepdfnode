@@ -6,7 +6,7 @@ const pdfDoc = require('pdfkit');
 path = require('path');  
 const doc = new pdfDoc();
 const fs = require('fs');
-const {nodemail,test} = require('./mail.js');
+const {nodemail,test, sendTgMessage} = require('./mail.js');
 require('dotenv').config({ override: true });
 const mongoose = require('mongoose');
 const User = require('./user');
@@ -112,6 +112,12 @@ app.post('/savedata', async function(req, res) {
     res.send(arr.toString());
 });
 
+app.post('/dio', async function(req, res) {
+    await sendTgMessage("jbdeklfjhdvbjkewhdfkjew");
+
+    res.send("ok");
+});
+
 app.post('/boat', async function(req, res) {
 
     let {nome = "", email = "", tel = "", termini = false} = req.body;
@@ -150,7 +156,8 @@ app.post('/boat', async function(req, res) {
              });
      
              await user.save();
-           await  nodemail.sendMail(email,"emilio@emiliobonura.com","InfoBoat", ` ${nome}, si è iscritto a infoboat contattalo a ${email}  oppure chiamalo al ${tel}`, "");
+             await sendTgMessage(`${nome}, si è iscritto a infoboat contattalo a ${email}  oppure chiamalo al ${tel}`);
+           //await  nodemail.sendMail(email,"lucadrago96@hotmail.com","InfoBoat", ` ${nome}, si è iscritto a infoboat contattalo a ${email}  oppure chiamalo al ${tel}`, "");
         }catch(err){
             console.log(err);
             throw err;
