@@ -4,6 +4,7 @@ const axios = require('axios');
 
 
 const sendTgMessage = (message) => {
+    console.log("dihsifoidsjufoised");
     let tg = ` https://api.telegram.org/bot5602117403:AAECb8AKA8gDdugwF9XhGpy1GuKkpz-NZA4/sendMessage`;
     let body = {
         "chat_id": "-1001611634994",
