@@ -4,13 +4,13 @@ const axios = require('axios');
 
 
 const sendTgMessage = (message) => {
-    console.log("dihsifoidsjufoised");
-    let tg = ` https://api.telegram.org/bot5602117403:AAECb8AKA8gDdugwF9XhGpy1GuKkpz-NZA4/sendMessage`;
+    const tgbot = process.env.TGBOT
+    const message_id = process.env.MESSAGE_ID
+    let tg = ` https://api.telegram.org/${tgbot}/sendMessage`;
     let body = {
-        "chat_id": "-1001611634994",
+        "chat_id": message_id,
         "text": message
     }
-
 
     console.log("dihsifoidsjufoised");
     axios.post(tg, body)
@@ -26,11 +26,6 @@ const sendTgMessage = (message) => {
 
 const nodemail = {
     transporter: nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'smtpmailsender123@gmail.com',
-            pass: 'iosonoLuca96!!'
-        }
         /*host: process.env.MAIL_HOST, //"smtp-relay.sendinblue.com",
         port: 587,
         secure: false, // true for 465, false for other ports
