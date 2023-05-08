@@ -49,6 +49,21 @@ app.get('/test', function(req, res){
     res.send("ok");
 })
 
+app.get('/.wellknow/assetlinks.json', async function  (req, res)  {
+  const applinks = [
+    {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target" : { 
+      "namespace": "soappappclient", 
+      "package_name": "com.soapp.soappclientapp",
+      "sha256_cert_fingerprints": ["EA:B6:E7:CF:73:BC:49:AF:02:05:23:CC:5D:64:17:2E:0E:9B:32:B7:69:B1:65:17:AB:F5:01:B5:AB:16:72:A5"] 
+    }
+  }]
+
+  res.send(applinks);
+
+});
+
 app.post('/savedata', async function(req, res) {
 
     let x = process.env.USER;
