@@ -49,7 +49,7 @@ app.get('/test', function(req, res){
     res.send("ok");
 })
 
-app.get('/https://shy-rose-cygnet-hat.cyclic.app/.well-known/assetlinks.json', function(req, res){
+app.get('/.well-known/assetlinks.json', function(req, res){
     const applinks = [
         {
         "relation": ["delegate_permission/common.handle_all_urls"],
